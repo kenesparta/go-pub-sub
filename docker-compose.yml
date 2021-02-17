@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+  redis:
+    image: "redis:alpine"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    container_name: redis
+    volumes:
+      - ./etc/redis/data:/data
+      - ./etc/redis/conf:/usr/local/etc/redis
+    networks:
+      - main_network
+
+  pub:
+    build:
+      context: "."
+      dockerfile: DockerfilePub
+    container_name: pub
+    restart: "no"
+    ports:
+      - 8080:8080
+    networks:
+      main_network:
+
+  sub:
+    build:
+      context: "."
+      dockerfile: DockerfileSub
+    container_name: sub
+    restart: "no"
+    ports:
+      - 8081:8081
+    networks:
+      main_network:
+
+networks:
+  main_network:

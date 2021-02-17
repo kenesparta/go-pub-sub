@@ -1,0 +1,13 @@
+FROM golang:1.16-alpine
+
+WORKDIR /sub
+
+COPY ./src/sub .
+
+RUN go get -d
+
+RUN go build -o sub .
+
+EXPOSE 8081
+
+CMD ./sub
