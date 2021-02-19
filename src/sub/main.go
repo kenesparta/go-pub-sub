@@ -13,16 +13,6 @@ func main() {
 		Password: "secret",     // The password IF set in the redis Config file
 		DB:       0,
 	})
-	// Ping the Redis server and check if any errors occurred
-	// err := redisClient.Ping(context.Background()).Err()
-	// if err != nil {
-	// 	// Sleep for 3 seconds and wait for Redis to initialize
-	// 	time.Sleep(3 * time.Second)
-	// 	err := redisClient.Ping(context.Background()).Err()
-	// 	if err != nil {
-	// 		panic(err)
-	// 	}
-	// }
 	ctx := context.Background()
 	// Subscribe to the Topic given
 	topic := redisClient.Subscribe(ctx, "new_users")
